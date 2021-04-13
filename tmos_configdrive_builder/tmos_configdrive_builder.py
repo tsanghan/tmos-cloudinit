@@ -128,7 +128,7 @@ def build_configdrive_from_files(userdata_file=None, configdrive_file=None,
                 'building ISO9660 configdrive meta_data.json from %s', metadata_file)
             try:
                 metadata_obj = json.loads(metadata)
-                if not 'uuid' in metadata_obj:
+                if 'uuid' not in metadata_obj:
                     LOG.info('generating OpenStack mandatory ID')
                     metadata_obj['uuid'] = str(uuid.uuid4())
                     metadata = json.dumps(metadata_obj)
@@ -190,7 +190,7 @@ def build_configdrive_from_decs(do_declaration_file=None,
         userdata_obj['tmos_declared']['do_declaration'] = do_obj
     if ts_obj:
         LOG.info('adding f5-telemetry-streaming declaration to user_data')
-        userdata_obj['tmos_declared']['ts_declaration'] = ts_obj        
+        userdata_obj['tmos_declared']['ts_declaration'] = ts_obj
     if as3_obj:
         LOG.info('adding f5-appsvcs-extensions declaration to user_data')
         userdata_obj['tmos_declared']['as3_declaration'] = as3_obj
@@ -239,7 +239,7 @@ if __name__ == "__main__":
         'TS_DECLARATION_FILE', '/declarations/ts_declaration.json')
     AS3_DECLARATION_FILE = os.getenv(
         'AS3_DECLARATION_FILE', '/declarations/as3_declaration.json')
-    
+
     PHONE_HOME_CLI = os.getenv('PHONE_HOME_CLI', None)
     PHONE_HOME_URL = os.getenv('PHONE_HOME_URL', None)
 
